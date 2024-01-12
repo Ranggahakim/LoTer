@@ -27,8 +27,8 @@ class MapSampleState extends State<MapSample> {
       Completer<GoogleMapController>();
 
   static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
+    target: LatLng(-6.973165, 107.632466),
+    zoom: 18,
   );
 
   static const CameraPosition _kLake = CameraPosition(
@@ -40,11 +40,56 @@ class MapSampleState extends State<MapSample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: const Text("Tes"),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        title: // Generated code for this Container Widget...
+            Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+          child: Container(
+            width: double.infinity,
+            height: 50,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: const [
+                BoxShadow(
+                  blurRadius: 4,
+                  color: Color(0x34090F13),
+                  offset: Offset(0, 2),
+                )
+              ],
+              borderRadius: BorderRadius.circular(40),
+            ),
+            child: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
+              child: TextFormField(
+                //controller: _model.textController,
+                //focusNode: _model.textFieldFocusNode,
+                obscureText: false,
+                decoration: const InputDecoration(
+                  labelText: 'Cari Pekerjaan',
+                  //labelStyle: FlutterFlowTheme.of(context).labelLarge,
+                  enabledBorder: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                  errorBorder: InputBorder.none,
+                  focusedErrorBorder: InputBorder.none,
+                  contentPadding:
+                      EdgeInsetsDirectional.fromSTEB(24, 12, 12, 12),
+                  prefixIcon: Icon(
+                    Icons.search_sharp,
+                    color: Colors.grey,
+                  ),
+                ),
+                //style: FlutterFlowTheme.of(context).bodyLarge,
+                //validator: _model.textControllerValidator.asValidator(context),
+              ),
+            ),
+          ),
+        ),
       ),
       body: GoogleMap(
-        mapType: MapType.normal,
+        mapType: MapType.satellite,
         initialCameraPosition: _kGooglePlex,
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);

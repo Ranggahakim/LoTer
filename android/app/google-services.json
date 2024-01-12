@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1064875074065",
+    "project_id": "loter-410809",
+    "storage_bucket": "loter-410809.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1064875074065:android:9dba0b5e30b21552fc07b0",
+        "android_client_info": {
+          "package_name": "io.DigitalCatalystMinds"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKRO3LA7VAj9lfdQOVALnOYXMmWC9LUmo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
