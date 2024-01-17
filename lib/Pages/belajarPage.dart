@@ -50,7 +50,7 @@ class _MyBelajarState extends State<MyBelajar> with TickerProviderStateMixin {
                   const GratisSection(),
                   // Generated code for this Text Widget...
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(16, 12, 0, 0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(16, 12, 0, 0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -63,7 +63,7 @@ class _MyBelajarState extends State<MyBelajar> with TickerProviderStateMixin {
                         ),
                         Container(
                           alignment: Alignment.centerLeft,
-                          child: Text(
+                          child: const Text(
                             'Mempersiapkan diri dari awal sebelum bekerja!',
                             style: TextStyle(fontSize: 14, color: Colors.grey),
                           ),
@@ -71,7 +71,7 @@ class _MyBelajarState extends State<MyBelajar> with TickerProviderStateMixin {
                       ],
                     ),
                   ),
-                  SingleChildScrollView(
+                  const SingleChildScrollView(
                     child: Column(
                       children: <Widget>[TryOutList()],
                     ),
@@ -79,7 +79,7 @@ class _MyBelajarState extends State<MyBelajar> with TickerProviderStateMixin {
                 ],
               ),
             ),
-            Center(
+            const Center(
               child: Text("Premium", style: TextStyle(fontSize: 32)),
             )
           ]),
@@ -204,33 +204,29 @@ class TryOutList extends StatelessWidget {
                   BoxShadow(
                       blurRadius: 4, color: Colors.black, offset: Offset(0, 2))
                 ],
-                borderRadius: BorderRadius.circular(16)),
+                borderRadius: BorderRadius.circular(0)),
             child: Container(
               alignment: Alignment.topLeft,
               padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
               child: Column(
                 children: [
-                  Container(
-                    child: Column(
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(top: 1),
-                          child: const Text(
-                            "TryOut Name",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 18),
-                          ),
+                  Column(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(top: 1),
+                        child: const Text(
+                          "TryOut Name",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18),
                         ),
-                        Container(
-                          child: const Text(
-                            "tag",
-                            style: TextStyle(
-                              fontSize: 12,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
+                      ),
+                      const Text(
+                        "tag",
+                        style: TextStyle(
+                          fontSize: 12,
+                        ),
+                      )
+                    ],
                   ),
                   Container(
                     margin: const EdgeInsets.only(top: 10),

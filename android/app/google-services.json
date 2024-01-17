@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "1064875074065",
+    "firebase_url": "https://loter-410809-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "loter-410809",
     "storage_bucket": "loter-410809.appspot.com"
   },
@@ -12,7 +13,20 @@
           "package_name": "io.DigitalCatalystMinds"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1064875074065-11ikp2mef7m087nqr5jg1mhe2qtbpkv2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.DigitalCatalystMinds",
+            "certificate_hash": "0966d3a1eb9506c44cb55774030ced3a3a851085"
+          }
+        },
+        {
+          "client_id": "1064875074065-mdqbugbo9o4nqh6drb8dqb27s71oviu6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAKRO3LA7VAj9lfdQOVALnOYXMmWC9LUmo"
@@ -20,7 +34,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1064875074065-mdqbugbo9o4nqh6drb8dqb27s71oviu6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

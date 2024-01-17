@@ -1,43 +1,33 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:loter/Models/main_models.dart';
-import 'package:loter/NavBar.dart';
-import 'package:loter/main.dart';
 import 'package:loter/myTheme.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
+
+final nameController = TextEditingController();
+String? userTypeText;
+final emailController = TextEditingController();
+final passwordController = TextEditingController();
 
 class MySignUp extends StatelessWidget {
-  final MainDB? mainDB;
-
-  MySignUp({Key? key, this.mainDB}) : super(key: key);
-
-  final nameController = TextEditingController();
-  final userTypeController = TextEditingController();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  const MySignUp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    if (mainDB != null) {
-      emailController.text = mainDB!.Email;
-      passwordController.text = mainDB!.Password;
-    }
-
     return MaterialApp(
       title: "Sign Up Page",
       theme: LoterMaterialTheme.myTheme,
       debugShowCheckedModeBanner: false,
-      home: Builder(builder: (context) {
-        return Container(
-          padding: EdgeInsets.fromLTRB(30, 50, 20, 50),
-          decoration: BoxDecoration(
-            color: Theme.of(context).backgroundColor,
-          ),
+      home: SingleChildScrollView(
+        child: Container(
+          height: 700,
+          padding: const EdgeInsets.fromLTRB(30, 50, 20, 50),
+          
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             mainAxisSize: MainAxisSize.max,
             children: [
               Container(
-                margin: EdgeInsets.only(top: 50),
+                margin: const EdgeInsets.only(top: 50),
                 child: Column(
                   children: [
                     Container(
@@ -48,7 +38,7 @@ class MySignUp extends StatelessWidget {
                               Theme.of(context).primaryTextTheme.headlineLarge,
                         )),
                     Container(
-                      margin: EdgeInsets.only(left: 20),
+                      margin: const EdgeInsets.only(left: 20),
                       child: Row(
                         children: [
                           Icon(
@@ -69,25 +59,24 @@ class MySignUp extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 50),
+                margin: const EdgeInsets.only(top: 50),
               ),
               Container(
                 width: MediaQuery.sizeOf(context).width,
-                padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                child: SignInWidget(),
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                child: const SignInWidget(),
               ),
-              Spacer(),
-
+              const Spacer(),
             ],
           ),
-        );
-      }),
+        ),
+      ),
     );
   }
 }
 
 class SignInWidget extends StatefulWidget {
-  SignInWidget({
+  const SignInWidget({
     super.key,
   });
 
@@ -120,9 +109,9 @@ class _SignInWidgetState extends State<SignInWidget> {
               ],
             ),
           ),
-          Container(margin: EdgeInsets.only(bottom: 20), child: NameBox()),
+          Container(margin: const EdgeInsets.only(bottom: 20), child: const NameBox()),
           Container(
-            margin: EdgeInsets.only(bottom: 20),
+            margin: const EdgeInsets.only(bottom: 20),
             child: DropdownButtonFormField<String>(
               value: dropdownValue,
               items: <String>['User', 'Company']
@@ -137,26 +126,27 @@ class _SignInWidgetState extends State<SignInWidget> {
               decoration: const InputDecoration(
                   labelText: 'Role',
                   fillColor: Colors.white,
-                  enabledBorder: const OutlineInputBorder(
+                  enabledBorder: OutlineInputBorder(
                     // width: 0.0 produces a thin "hairline" border
                     borderSide:
-                        const BorderSide(color: Colors.black, width: 0.0),
+                        BorderSide(color: Colors.black, width: 0.0),
                   ),
                   border: OutlineInputBorder()),
               borderRadius: BorderRadius.circular(10),
               onChanged: (String? newValue) {
                 setState(() {
                   dropdownValue = newValue!;
+                  userTypeText = newValue;
                 });
               },
             ),
           ),
-          Container(margin: EdgeInsets.only(bottom: 20), child: EmailBox()),
-          PasswordBox(),
-          Container(
+          Container(margin: const EdgeInsets.only(bottom: 20), child: const EmailBox()),
+          const PasswordBox(),
+          SizedBox(
             width: MediaQuery.sizeOf(context).width,
             child: Container(
-              margin: EdgeInsets.only(top: 20),
+              margin: const EdgeInsets.only(top: 20),
               width: 100,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(2),
@@ -165,11 +155,49 @@ class _SignInWidgetState extends State<SignInWidget> {
                   style: TextButton.styleFrom(
                     backgroundColor: Theme.of(context).primaryColor,
                   ),
-                  onPressed: () {
-                    runApp(MainNavbar());
+                  onPressed: () async {
+                    final User? userFirebase = (await FirebaseAuth.instance
+                            .createUserWithEmailAndPassword(
+                      email: emailController.text,
+                      password: passwordController.text,
+                    )
+                            .catchError((errorMsg) {
+                      //print(errorMsg);
+                    }))
+                        .user;
+
+                    try {
+                      userFirebase;
+                    } on FirebaseAuthException catch (e) {
+                      //print(e.code);
+                      if (e.code == 'weak-password') {
+                        //print('The password provided is too weak.');
+                      } else if (e.code == 'email-already-in-use') {
+                        //print('The account already exists for that email.');
+                      }
+                    } catch (e) {
+                      //print(e);
+                    }
+
+                    DatabaseReference usersRef = FirebaseDatabase.instance
+                        .ref()
+                        .child("users")
+                        .child(userFirebase!.uid);
+
+                    userTypeText ??= "User";
+                    Map userDataMap = {
+                      "name": nameController.text,
+                      "email": emailController.text,
+                      "id": userFirebase.uid,
+                      "userType": userTypeText,
+                      "about": "",
+                    };
+
+                    usersRef.set(userDataMap);
+                    
                   },
-                  child:
-                      Text("Sign Up", style: TextStyle(color: Colors.white))),
+                  child: const Text("Sign Up",
+                      style: TextStyle(color: Colors.white))),
             ),
           ),
         ],
@@ -179,7 +207,7 @@ class _SignInWidgetState extends State<SignInWidget> {
 }
 
 class EmailBox extends MySignUp {
-  EmailBox({
+  const EmailBox({
     super.key,
   });
 
@@ -212,7 +240,7 @@ class EmailBox extends MySignUp {
             focusedErrorBorder: InputBorder.none,
             contentPadding: EdgeInsetsDirectional.fromSTEB(24, 12, 12, 12),
             prefixIcon: Icon(
-              Icons.person,
+              Icons.mail,
               color: Colors.grey,
             ),
           ),
@@ -225,7 +253,7 @@ class EmailBox extends MySignUp {
 }
 
 class NameBox extends MySignUp {
-  NameBox({
+  const NameBox({
     super.key,
   });
 
@@ -248,7 +276,7 @@ class NameBox extends MySignUp {
           borderRadius: BorderRadius.circular(10),
         ),
         child: TextFormField(
-          controller: emailController,
+          controller: nameController,
           obscureText: false,
           decoration: const InputDecoration(
             labelText: 'Your Name',
@@ -271,7 +299,7 @@ class NameBox extends MySignUp {
 }
 
 class PasswordBox extends MySignUp {
-  PasswordBox({
+  const PasswordBox({
     super.key,
   });
 
