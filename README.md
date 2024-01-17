@@ -1,11 +1,12 @@
 # LoTer
 ![image](https://github.com/Ranggahakim/LoTer/assets/63321717/477cc435-aa51-4f4c-a7d3-1b5dabb649e0)
 
-LoTer adalah aplikasi dimana pengguna dapat mencari pekerjaan yang relevan, sesuai dengan skill, dan jarak.
+Job seekers often face challenges in finding suitable job vacancies, especially those in close proximity to their location. This presents significant difficulties, as job applicants generally prefer opportunities that are not far from their place of residence. That's why we introduce you to the LoTer Application or "Lokasi Terdekat", that if you translate it to english, it's mean "Nearest Job Vacancies".
 
-Aplikasi lowongan kerja hanya memperlihatkan deskripsi pekerjaan, persyaratan dan kadang-kadang aplikasi pencari pekerjaan ada yang hanya alamat nya, jadi di aplikasi ini kita lebih mempermudah para pekerja untuk mencari pekerjaan yang terdekat, dengan ada nya Maps akan menunjukkan lokasi dimana saja yang sedang membuka lowongan kerja, Pekerjaan juga dengan mudah langsung datang ke lokasi untuk melamar pekerjaan dan juga para perekrutan kerja bisa lebih mengetahui orang yang ingin melamar pekerjaan,Para pelamar pekerja bisa membuat opsi lamar secara Offline ataupun juga bisa Online. 
+LoTer is an application that uses Maps navigation which aims to display information on nearby job vacancies to users, making it easier for applicants to find nearby jobs. You don't need to worry about time, you can apply for a job in just one tap. And if you are the company that seek for new employee, you can use this app also. Just like scrolling Social Media, you can see the applicant, without open your email, or even open your computer! 
 
-Opsi lamar secara Offline ataupun juga bisa Online dapat dipilih tergantung kebijakan perusahaan masing masing perusahaan. Perusahaan juga dapat nge acc langsung dari aplikasi tersebut sehingga dapat meng-seleksi calon yang terdaftar, dan memberikan email atau no kontak konfirmsi kepada email orang yg mendaftar tersebut untuk pemanggilan ke lokasi tempat lowongan yang dituju tersebut.
+just simply tap, tap, and tap, you can get a new job or even a new employee!
+
 
 ## Screenshots In-App
 * Login Page
